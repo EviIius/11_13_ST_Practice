@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 import altair as alt
-import numpy as np
+import numpy as pd
 import pandas as pd
 
 st.header('Homework 1')
