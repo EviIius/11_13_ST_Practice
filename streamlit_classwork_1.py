@@ -12,19 +12,12 @@ st.markdown(
 "Print the dataframe you create and use the following code block to help get you started"
 )
 
-st.code(
-''' 
-x_limit = 
-
-# List of values from 0 to 100 each value being 1 greater than the last
-x_axis = np.arange()
-
-# Create a random array of data that we will use for our y values
-y_data = []
-
+x_limit = 100
+x_axis = np.arange(0, x_limit, 1)
+y_data = [random.random() for value in x_axis]
 df = pd.DataFrame({'x': x_axis,
                      'y': y_data})
-st.write(df)''',language='python')
+st.write(df) 
 
 
 st.markdown(
@@ -32,12 +25,11 @@ st.markdown(
 "Use the following code block to help get you started."
 )
 
-st.code(
-''' 
-scatter = alt.Chart().mark_point().encode()
-
-st.altair_chart(scatter, use_container_width=True)''',language='python')
-
+scatter = alt.Chart(df).mark_point().encode(
+    x = 'x',
+    y = 'y'
+)
+st.altair_chart(scatter, use_container_width=True)
 
 st.markdown(
 "**QUESTION 3**: Lets make some edits to the chart by reading the documentation on Altair.\n"
@@ -48,6 +40,18 @@ st.markdown(
 )
 
 st.markdown("The five changes I made were.....")
+scatter = alt.Chart(df, title = "Hello Title").mark_point().encode(
+    alt.X("x", title="x"),
+        alt.Y(
+            "y",
+            title="y",
+            scale=alt.Scale(domain=[-5, 40]),
+    tooltip = ["x", "y"],
+    opacity= alt.condition(hover, alt.value(.3),alt.value(0))
+))
+st.altair_chart(scatter, use_container_width=True)
+
+
 st.markdown("""
 The 5 changes I made were:
 - Change 1
